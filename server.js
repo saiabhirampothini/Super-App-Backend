@@ -5,17 +5,17 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 const connectDB = require("./config/db");
-const http = require("http");
-const socketIo = require("socket.io");
+// const http = require("http");
+// const socketIo = require("socket.io");
 
 //Create Server for socket
-const ioServer = http.createServer();
-const io = socketIo(ioServer, {
-  cors: {
-    origin: "*",
-    credentials: true,
-  },
-});
+// const ioServer = http.createServer();
+// const io = socketIo(ioServer, {
+//   cors: {
+//     origin: "*",
+//     credentials: true,
+//   },
+// });
 
 //op
 
@@ -41,31 +41,31 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Create a map to store userData
-global.onlineUsers = new Map();
+// global.onlineUsers = new Map();
 
-//For sockets
-io.on("connection", (socket) => {
-  console.log("connect to socket", socket.id);
-  global.chatSocket = socket;
+// //For sockets
+// io.on("connection", (socket) => {
+//   console.log("connect to socket", socket.id);
+//   global.chatSocket = socket;
 
-  socket.on("add-user", (userID) => {
-    onlineUsers.set(userID, socket.id);
-  });
+//   socket.on("add-user", (userID) => {
+//     onlineUsers.set(userID, socket.id);
+//   });
 
-  socket.on("send-msg", (data) => {
-    const sendUnderSocket = onlineUsers.get(data.to);
-    if (sendUnderSocket) {
-      socket.to(sendUnderSocket).emit("msg-recieve", data.message);
-    }
-  });
+//   socket.on("send-msg", (data) => {
+//     const sendUnderSocket = onlineUsers.get(data.to);
+//     if (sendUnderSocket) {
+//       socket.to(sendUnderSocket).emit("msg-recieve", data.message);
+//     }
+//   });
 
-  socket.on("send-notification", (data) => {
-    const sendUnderSocket = onlineUsers.get(data.to);
-    if (sendUnderSocket) {
-      socket.to(sendUnderSocket).emit("notification-recieve", data.message);
-    }
-  });
-});
+//   socket.on("send-notification", (data) => {
+//     const sendUnderSocket = onlineUsers.get(data.to);
+//     if (sendUnderSocket) {
+//       socket.to(sendUnderSocket).emit("notification-recieve", data.message);
+//     }
+//   });
+// });
 
 //Test route
 app.get("/", (req, res) => {
@@ -96,9 +96,9 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
-//IO sever on another port
-const IO_PORT = process.env.PORT || 4000;
+// //IO sever on another port
+// const IO_PORT = process.env.PORT || 4000;
 
-ioServer.listen(IO_PORT, () => {
-  console.log(`Socket.IO server is running on port ${IO_PORT}`);
-});
+// ioServer.listen(IO_PORT, () => {
+//   console.log(`Socket.IO server is running on port ${IO_PORT}`);
+// });
