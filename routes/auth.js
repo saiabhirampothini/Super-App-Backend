@@ -102,17 +102,19 @@ router.post(
   }
 );
 
-router.get("/logout", (req, res) => {
+router.get("/logout", auth, (req, res) => {
   try {
     // Clear all cookies
     const cookies = req.cookies;
     for (let cookieName in cookies) {
-      res.cookie(cookieName, "", { expires: new Date(0) });
+      if (cookies.hasOwnProperty(cookieName)) {
+        res.clearCookie(cookieName);
+      }
     }
     res.status(200).json({ msg: "Logout successfully" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ msg: "Logout not successful try again" });
+    res.status(500).json({ msg: "Logout not successful, please try again" });
   }
 });
 
