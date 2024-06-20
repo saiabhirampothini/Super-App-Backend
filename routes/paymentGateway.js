@@ -133,7 +133,7 @@ router.get(
                     merchantTransactionId === orders[i].merchantTransactionId
                   ) {
                     const response = await axios.post(
-                      "http://localhost:5000/api/orders/multiple-orders-online",
+                      "https://super-app-backend.vercel.app/api/orders/multiple-orders-online",
                       {
                         productIDS: orders[i].productIDS,
                         quantities: orders[i].quantities,
@@ -154,7 +154,8 @@ router.get(
             };
             placeOrder();
 
-            const redirectUrl = "http://localhost:3000/orders";
+            const redirectUrl =
+              "https://super-app-frontend-eight.vercel.app/orders";
 
             // Generate an HTML page with a link that redirects to the specified URL
             const htmlResponse = `
@@ -180,7 +181,8 @@ router.get(
             res.send(htmlResponse);
           } else {
             console.log("Payment failed");
-            const redirectUrl = "http://localhost:3000/cart";
+            const redirectUrl =
+              "https://super-app-frontend-eight.vercel.app/cart";
 
             // Generate an HTML page with a link that redirects to the specified URL
             const htmlResponse = `
@@ -334,7 +336,7 @@ router.get(
                   // console.log("Test");
                   // console.log(orderSingle);
                   const response = await axios.post(
-                    "http://localhost:5000/api/orders/add-orders",
+                    "https://super-app-backend.vercel.app/api/orders/add-orders",
                     {
                       productID: orderSingle.productID,
                       quantity: orderSingle.quantity,
@@ -355,7 +357,8 @@ router.get(
             };
             placeOrder();
 
-            const redirectUrl = "http://localhost:3000/orders";
+            const redirectUrl =
+              "https://super-app-frontend-eight.vercel.app/orders";
 
             // Generate an HTML page with a link that redirects to the specified URL
             const htmlResponse = `
@@ -381,7 +384,8 @@ router.get(
             res.send(htmlResponse);
           } else {
             console.log("Payment failed");
-            const redirectUrl = "http://localhost:3000/cart";
+            const redirectUrl =
+              "https://super-app-frontend-eight.vercel.app/cart";
 
             // Generate an HTML page with a link that redirects to the specified URL
             const htmlResponse = `
