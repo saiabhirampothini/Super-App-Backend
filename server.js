@@ -28,7 +28,7 @@ app.use(express.json({ extended: false }));
 //For cross-origin access
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://super-app-frontend-eight.vercel.app",
     credentials: true,
   })
 ); //Enables the inclusion of cookies for CORS
