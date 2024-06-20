@@ -90,12 +90,7 @@ router.post(
       };
       const jwtSecretKey = process.env.JWT_SECRET_KEY;
       const token = jwt.sign(payload, jwtSecretKey, { expiresIn: 36000 }); //10 hrs
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "Lax",
-        path: "/",
-      }); // secure should be true in production with HTTPS
+      res.cookie("token", token); // secure should be true in production with HTTPS
       res.status(200).json({ msg: "User Logged In Successfully" });
     } catch (err) {
       console.error(err.message);
@@ -104,19 +99,19 @@ router.post(
   }
 );
 
-// router.get("/logout", (req, res) => {
-//   try {
-//     // Clear all cookies
-//     const cookies = req.cookies;
-//     for (let cookieName in cookies) {
-//       res.cookie(cookieName, "", { expires: new Date(0) });
-//     }
-//     res.status(200).json({ msg: "Logout successfully" });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ msg: "Logout not successful try again" });
-//   }
-// });
+router.get("/logout", (req, res) => {
+  try {
+    // Clear all cookies
+    const cookies = req.cookies;
+    for (let cookieName in cookies) {
+      res.cookie(cookieName, "", { expires: new Date(0) });
+    }
+    res.status(200).json({ msg: "Logout successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "Logout not successful try again" });
+  }
+});
 
 //For route protection
 router.get("/check", auth, async (req, res) => {

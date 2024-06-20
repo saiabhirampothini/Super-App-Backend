@@ -128,13 +128,7 @@ router.post(
       };
       const jwtSecretKey = process.env.JWT_SECRET_KEY;
       const token = jwt.sign(payload, jwtSecretKey, { expiresIn: 36000 }); //10 hrs
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "Lax",
-        maxAge: 1800000, // Expire after 1/2 hour of interaction
-        path: "/",
-      }); // secure should be true in production with HTTPS
+      res.cookie("token", token); // secure should be true in production with HTTPS
       res.status(200).json({ msg: "User Registered Successfully" });
     } catch (err) {
       console.error(err.message);
