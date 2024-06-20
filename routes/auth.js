@@ -104,13 +104,7 @@ router.post(
 
 router.get("/logout", auth, (req, res) => {
   try {
-    // Clear all cookies
-    const cookies = req.cookies;
-    for (let cookieName in cookies) {
-      if (cookies.hasOwnProperty(cookieName)) {
-        res.clearCookie(cookieName);
-      }
-    }
+    res.clearCookie("token");
     res.status(200).json({ msg: "Logout successfully" });
   } catch (err) {
     console.log(err);
