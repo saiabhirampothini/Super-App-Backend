@@ -144,7 +144,7 @@ router.get(
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      // sameSite: "strict",
+      sameSite: "Lax",
       path: "/",
       maxAge: 1800000, // Expire after 1/2 hour of interaction
     }); // secure should be true in production with HTTPS

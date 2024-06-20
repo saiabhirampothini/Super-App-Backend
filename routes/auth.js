@@ -93,7 +93,7 @@ router.post(
       res.cookie("token", token, {
         httpOnly: true,
         secure: true,
-        // sameSite: "strict",
+        sameSite: "Lax",
         path: "/",
       }); // secure should be true in production with HTTPS
       res.status(200).json({ msg: "User Logged In Successfully" });
