@@ -5,6 +5,7 @@ const axios = require("axios");
 const sha256 = require("sha256");
 const uniqid = require("uniqid");
 const auth = require("../middleware/auth");
+require("dotenv").config();
 
 // const MERCHANT_ID = "PGTESTPAYUAT86";
 // const PHONE_PE_HOST_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox";
@@ -24,6 +25,7 @@ router.post("/pay", auth, async (req, res, next) => {
 
   // Transaction amount
   // const amount = +req.query.amount;
+  console.log(MERCHANT_ID);
   const amount = req.body.total;
 
   // User ID is the ID of the user present in our application DB
