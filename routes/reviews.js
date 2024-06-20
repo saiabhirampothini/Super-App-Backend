@@ -118,28 +118,10 @@ router.post("/get-product-reviews", auth, async (req, res) => {
 
 router.post("/get-product-reviews-additional", auth, async (req, res) => {
   const { productID } = req.body;
-  const name = "abhi1@NOTHINGphone(2a)";
 
   const getProductReviewsQuery = `select avg(STARS_RATING) as avg_rating,count(*) as noofreviews from REVIEWS where product_id=?;`;
   const i = [productID];
   rds_connection.query(getProductReviewsQuery, i, (err, results, fields) => {
-    if (err) {
-      res.status(500).json({ msg: err });
-    } else {
-      // console.log(results);
-      // console.log(fields)
-      res.status(200).json({ data: results });
-    }
-  });
-});
-
-router.post("/rough", auth, async (req, res) => {
-  const { productID } = req.body;
-  const name = "abhi1@NOTHINGphone(2a)";
-
-  const getProductReviewsQuery = `select * from REVIEWS;`;
-  const i = [productID];
-  rds_connection.query(getProductReviewsQuery, (err, results, fields) => {
     if (err) {
       res.status(500).json({ msg: err });
     } else {
