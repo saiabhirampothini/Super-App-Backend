@@ -6,6 +6,7 @@ const bcryptjs = require("bcryptjs");
 const gravatar = require("gravatar");
 const { check, validationResult } = require("express-validator");
 const AWS = require("aws-sdk");
+const { none } = require("../middleware/multer");
 require("dotenv").config(); //Adds the data from .env to process.env
 
 router.get("/", (req, res) => {
@@ -128,7 +129,9 @@ router.post(
       };
       const jwtSecretKey = process.env.JWT_SECRET_KEY;
       const token = jwt.sign(payload, jwtSecretKey, { expiresIn: 36000 }); //10 hrs
-      res.cookie("token", token); // secure should be true in production with HTTPS
+      res.cookie("token", token, {
+        sameSite: none,
+      }); // secure should be true in production with HTTPS
       res.status(200).json({ msg: "User Registered Successfully" });
     } catch (err) {
       console.error(err.message);
