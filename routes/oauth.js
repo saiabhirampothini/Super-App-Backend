@@ -145,7 +145,7 @@ router.get(
       sameSite: "None",
       secure: true,
     }); // secure should be true in production with HTTPS
-    res.redirect("https://super-app-frontend-eight.vercel.app/DashBoard");
+    res.redirect("https://super-app-frontend-eight.vercel.app/dashBoard");
   }
 );
 
