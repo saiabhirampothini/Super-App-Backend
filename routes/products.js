@@ -75,7 +75,6 @@
 //       Category,
 //     ];
 
-
 //     const params = {
 //       TableName: "SuperApp",
 //       KeyConditionExpression: "id = :id",
@@ -592,7 +591,6 @@ router.put("/resume-product", auth, async (req, res) => {
         res.status(500).json({ msg: "Error resuming products" });
       } else {
         res.status(200).json({ data: results });
-        
       }
     }
   );
@@ -617,32 +615,34 @@ router.put("/update-stocks", auth, async (req, res) => {
   });
 });
 
-router.get("/", auth, async (req, res) => {
-  const getProductBySeller = `show tables;`;
-  const getValues = [req.user.user.userID];
-  rds_connection.query(getProductBySeller, (err, results, fields) => {
-    if (err) {
-      console.log(err.stack);
-      res.status(500).json({ msg: "Error fetching All products" });
-    } else {
-      res.status(200).json({ data: results });
-      // console.log(results);
-      // console.log(fields);
-    }
-  });
-});
-
+// router.get("/", auth, async (req, res) => {
+//   const getProductBySeller = `show tables;`;
+//   const getValues = [req.user.user.userID];
+//   rds_connection.query(getProductBySeller, (err, results, fields) => {
+//     if (err) {
+//       console.log(err.stack);
+//       res.status(500).json({ msg: "Error fetching All products" });
+//     } else {
+//       res.status(200).json({ data: results });
+//       // console.log(results);
+//       // console.log(fields);
+//     }
+//   });
+// });
 
 router.get("/:id", auth, async (req, res) => {
-    const getProductBySeller = `select * from SELLER where product_id=? ;`;
-    const getValues = [req.params.id];
-    // console.log(getValues);
-    AWS.config.update({
-      region: process.env.AWS_REGION,
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.SECRET_ACCESS_KEY,
-    });
-    rds_connection.query(getProductBySeller, getValues, async (err, results, fields) => {
+  const getProductBySeller = `select * from SELLER where product_id=? ;`;
+  const getValues = [req.params.id];
+  // console.log(getValues);
+  AWS.config.update({
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  });
+  rds_connection.query(
+    getProductBySeller,
+    getValues,
+    async (err, results, fields) => {
       if (err) {
         console.log(err.stack);
         res.status(500).json({ msg: "Error fetching All products" });
@@ -675,7 +675,8 @@ router.get("/:id", auth, async (req, res) => {
         }
         res.status(200).json({ data: results });
       }
-    });
-  });
+    }
+  );
+});
 
 module.exports = router;
