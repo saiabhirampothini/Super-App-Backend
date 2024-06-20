@@ -7,17 +7,17 @@ const uniqid = require("uniqid");
 const auth = require("../middleware/auth");
 require("dotenv").config();
 
-// const MERCHANT_ID = "PGTESTPAYUAT86";
-// const PHONE_PE_HOST_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox";
-// const SALT_INDEX = 1;
-// const SALT_KEY = "96434309-7796-489d-8924-ab56988a6076";
-// const APP_BE_URL = "http://localhost:5000"; // our application
+const MERCHANT_ID = "PGTESTPAYUAT86";
+const PHONE_PE_HOST_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox";
+const SALT_INDEX = 1;
+const SALT_KEY = "96434309-7796-489d-8924-ab56988a6076";
+const APP_BE_URL = "https://super-app-backend.vercel.app"; // our application
 
-const MERCHANT_ID = process.env.MERCHANT_ID;
-const PHONE_PE_HOST_URL = process.env.PHONE_PE_HOST_URL;
-const SALT_INDEX = process.env.SALT_INDEX;
-const SALT_KEY = process.env.SALT_KEY;
-const APP_BE_URL = process.env.APP_BE_URL; // our application
+// const MERCHANT_ID = process.env.MERCHANT_ID;
+// const PHONE_PE_HOST_URL = process.env.PHONE_PE_HOST_URL;
+// const SALT_INDEX = process.env.SALT_INDEX;
+// const SALT_KEY = process.env.SALT_KEY;
+// const APP_BE_URL = process.env.APP_BE_URL; // our application
 
 const orders = [];
 router.post("/pay", auth, async (req, res, next) => {
