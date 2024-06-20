@@ -119,7 +119,7 @@ router.post("/get-product-reviews", auth, async (req, res) => {
 router.post("/get-product-reviews-additional", auth, async (req, res) => {
   const { productID } = req.body;
 
-  const getProductReviewsQuery = `select avg(STARS_RATING) as avg_rating,count(*) as noofreviews from REVIEWS where product_id=?;`;
+  const getProductReviewsQuery = `SELECT AVG(STARS_RATING) AS avg_rating,count(*) as noofreviews from REVIEWS where PRODUCT_ID=?;`;
   const i = [productID];
   rds_connection.query(getProductReviewsQuery, i, (err, results, fields) => {
     if (err) {
