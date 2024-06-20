@@ -104,7 +104,7 @@ router.post(
 
 router.get("/logout", auth, (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", { expires: new Date(0) });
     res.status(200).json({ msg: "Logout successfully" });
   } catch (err) {
     console.log(err);
