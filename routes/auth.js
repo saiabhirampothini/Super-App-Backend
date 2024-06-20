@@ -120,9 +120,9 @@ router.get("/logout", (req, res) => {
 //For route protection
 router.get("/check", auth, async (req, res) => {
   if (req.user.user.id && req.user.user.userID) {
-    return res.status(200);
+    return res.status(200).json({ msg: "Token exists" });
   } else {
-    return res.status(400);
+    return res.status(400).json({ msg: "Token does not exists" });
   }
 });
 
