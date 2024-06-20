@@ -142,8 +142,9 @@ router.get(
     const token = jwt.sign(payload, jwtSecretKey, { expiresIn: 36000 }); //10 hrs
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "strict",
+      path: "/",
       maxAge: 1800000, // Expire after 1/2 hour of interaction
     }); // secure should be true in production with HTTPS
     res.redirect("http://localhost:3000/DashBoard");

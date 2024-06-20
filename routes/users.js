@@ -41,10 +41,9 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-   
+
     const { firstName, lastName, userID, email, phone, gender, password } =
       req.body;
-    
 
     try {
       let user = await User.findOne({
@@ -131,9 +130,10 @@ router.post(
       const token = jwt.sign(payload, jwtSecretKey, { expiresIn: 36000 }); //10 hrs
       res.cookie("token", token, {
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: "strict",
         maxAge: 1800000, // Expire after 1/2 hour of interaction
+        path: "/",
       }); // secure should be true in production with HTTPS
       res.status(200).json({ msg: "User Registered Successfully" });
     } catch (err) {
