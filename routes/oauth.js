@@ -35,7 +35,8 @@ passport.use(
     {
       clientID: clientID,
       clientSecret: clientSecret,
-      callbackURL: "http://localhost:5000/api/oauth/auth/google/callback",
+      callbackURL:
+        "https://super-app-backend.vercel.app/api/oauth/auth/google/callback",
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -143,11 +144,11 @@ router.get(
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
+      // sameSite: "strict",
       path: "/",
       maxAge: 1800000, // Expire after 1/2 hour of interaction
     }); // secure should be true in production with HTTPS
-    res.redirect("http://localhost:3000/DashBoard");
+    res.redirect("https://super-app-frontend-eight.vercel.app/DashBoard");
   }
 );
 

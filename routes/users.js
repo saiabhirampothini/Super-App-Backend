@@ -131,7 +131,7 @@ router.post(
       res.cookie("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        // sameSite: "strict",
         maxAge: 1800000, // Expire after 1/2 hour of interaction
         path: "/",
       }); // secure should be true in production with HTTPS
